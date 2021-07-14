@@ -40,22 +40,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="email"
-                            class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                name="email" value="{{$user['email']}}" required autocomplete="email">
-
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
 
                     <div class="form-group row">
                         <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
@@ -64,20 +48,6 @@
                             <input id="phone" value="{{ $user['phone'] }}" type="tel" placeholder="03001234567" pattern="[0-9]{11}" class="form-control @error('phone') is-invalid @enderror" name="phone" required autocomplete="phone">
 
                             @error('phone')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="cnic" class="col-md-4 col-form-label text-md-right">{{ __('CNIC') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="cnic" type="tel" value="{{ $user['cnic'] }}" placeholder="1234567890123" pattern="[0-9]{13}" class="form-control @error('cnic') is-invalid @enderror" name="cnic" required>
-
-                            @error('cnic')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

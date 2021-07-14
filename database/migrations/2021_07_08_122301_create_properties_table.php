@@ -22,6 +22,7 @@ class CreatePropertiesTable extends Migration
             $table->foreign('Seller_ID')->references('id')->on('users')->onDelete('cascade');
             $table->decimal('Latitude');
             $table->decimal('Longitude');
+            $table->string('image');
             $table->timestamps();
         });
     }

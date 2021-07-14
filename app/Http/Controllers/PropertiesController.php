@@ -21,9 +21,12 @@ class PropertiesController extends Controller
      */
     public function index()
     {
-        if(auth()->user()['id'] == 3){
+        if(auth()->user()['role_id'] == 1 or auth()->user()['role_id'] == 3){
             $properties = property::all();
             return response()->json($properties);
+        }else{
+            $properties = property::where('Seller_ID',2);
+            return $properties;
         }
     }
 

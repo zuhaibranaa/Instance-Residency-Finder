@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AccountsController extends Controller
 {
@@ -21,7 +22,7 @@ class AccountsController extends Controller
     {
         if (auth()->user()['role_id'] == 1) {
             $u  = User::all();
-            return view('users')->with('users',$u);
+            return view('users')->with('users',$u)->with('admins',0);
         }
     }
 
@@ -52,7 +53,17 @@ class AccountsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find(auth()->user()->id);
+        $user->name = $request['name'];
+        $user->phone = $request['phone'];
+        if(auth()->user()->role_id != 1){
+            $user->role_id = $request['role_id'];
+        }
+        $user->password = Hash::make($request['password']);
+        $user->save();
+        return redirect()->to('/');
+        // return 123;
+
     }
 
     /**
@@ -63,6 +74,10 @@ class AccountsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        if (auth()->user()->id == $user['id'] or auth()->user()['role_id'] == 1) {
+            $user->delete();
+        }
+        return back();
     }
 }
