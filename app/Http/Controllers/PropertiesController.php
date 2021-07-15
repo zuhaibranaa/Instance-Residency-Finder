@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\property;
 use App\Models\User;
 use App\Models\role;
@@ -21,12 +22,18 @@ class PropertiesController extends Controller
      */
     public function index()
     {
-        if(auth()->user()['role_id'] == 1 or auth()->user()['role_id'] == 3){
+        $role = auth()->user();
+        if($role['role_id'] == 1){
             $properties = property::all();
-            return response()->json($properties);
-        }else{
-            $properties = property::where('Seller_ID',2);
-            return $properties;
+            return view('properties')->with('properties',$properties);
+        }else if($role['role_id'] == 3){
+            return '<html><head><title>Access Denied</title></head><body style="background-color: black; color:red;text-align: center"><h1>Access Denied</h1></body></html>';
+        }
+        else{
+            // $properties = property::where('Seller_ID',$role->id);
+            $properties = DB::table('properties')->where('Seller_ID', '=', $role->id)->get();
+            $props = json_decode($properties,true);
+            return view('properties')->with('properties',$props);
         }
     }
 
