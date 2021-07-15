@@ -5,10 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\property;
-use App\Models\User;
-use App\Models\role;
-use Illuminate\Support\Facades\Auth;
-use PHPUnit\Util\Json;
 
 class PropertiesController extends Controller
 {
@@ -26,10 +22,7 @@ class PropertiesController extends Controller
         if($role['role_id'] == 1){
             $properties = property::all();
             return view('properties')->with('properties',$properties);
-        }else if($role['role_id'] == 3){
-            return '<html><head><title>Access Denied</title></head><body style="background-color: black; color:red;text-align: center"><h1>Access Denied</h1></body></html>';
-        }
-        else{
+        }else if($role['role_id'] == 2){
             // $properties = property::where('Seller_ID',$role->id);
             $properties = DB::table('properties')->where('Seller_ID', '=', $role->id)->get();
             $props = json_decode($properties,true);
@@ -44,7 +37,7 @@ class PropertiesController extends Controller
      */
     public function create()
     {
-        //
+        return view('create_property');
     }
 
     /**
@@ -55,18 +48,28 @@ class PropertiesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $img = array();
+        if($request->hasFile('image')) {
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+            $images = $request->file('image');
+            foreach($images as $image) {
+                $path = $image->getClientOriginalName();
+                $name = time() . '-' . $path;
+                array_push($img,$name);
+                $image->storeAs('gallery-images', $name);
+            }
+          }
+        $string_array = json_encode($img);
+        $property = new property();
+        $property->Title = $request['title'];
+        $property->Location = $request['location'];
+        $property->Property_Type = $request['roleid'];
+        $property->Seller_ID = auth()->user()->id;
+        $property->Latitude = 75.22;
+        $property->Longitude = 29.33;
+        $property->image = $string_array;
+        $property->save();
+        return back();
     }
 
     /**

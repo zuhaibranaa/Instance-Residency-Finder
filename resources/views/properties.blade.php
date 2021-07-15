@@ -8,6 +8,8 @@
             <div class="card-body">
                 <div class="page-header d-flex justify-content-between">
                     <h1>Properties</h1>
+                    <a href="property/create" class="btn btn-primary btn-sm align-self-center">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i> Add </a>
                 </div>
                 <table class="table table-striped table-sm table-responsive-md">
                     <caption>{{ count($properties) }} Properties</caption>

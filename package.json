@@ -19,9 +19,16 @@
         "postcss": "^8.1.14",
         "resolve-url-loader": "^4.0.0",
         "sass": "^1.32.11",
-        "sass-loader": "^11.0.1"
+        "sass-loader": "^11.0.1",
+        "vue": "^2.6.14",
+        "vue-loader": "^15.9.7",
+        "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
-        "font-awesome": "^4.7.0"
+        "font-awesome": "^4.7.0",
+        "leaflet": "^1.7.1",
+        "mapbox-gl": "^2.3.1",
+        "vue2-google-maps": "^0.10.7",
+        "vue3-google-maps": "0.0.1"
     }
 }
