@@ -80,7 +80,8 @@ class PropertiesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $property = property::find($id);
+        return response()->json_encode($property);
     }
 
     /**
@@ -92,7 +93,31 @@ class PropertiesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $property = property::find($id);
+        $img = array();
+        if($request->hasFile('image')) {
+
+            $images = $request->file('image');
+            foreach($images as $image) {
+                $path = $image->getClientOriginalName();
+                $name = time() . '-' . $path;
+                array_push($img,$name);
+                $image->storeAs('gallery-images', $name);
+            }
+          }
+        $string_array = json_encode($img);
+        if (auth()->user()->id == $property['Seller_ID']) {
+            $property->Title = $request['title'];
+            $property->Title = $request['Location'];
+            $property->Title = $request['Property_Type'];
+            $property->Title = $request['Latitude'];
+            $property->Title = $request['Longitude'];
+            $property->Title = $request['image'];
+            $property->save();
+            return back()->with('message','Data Updated Successfully');
+        }else {
+            echo "Permission Denied";
+        }
     }
 
     /**
