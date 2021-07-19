@@ -20,8 +20,7 @@ class CreatePropertiesTable extends Migration
             $table->string('Property_Type');
             $table->unsignedBigInteger('Seller_ID');
             $table->foreign('Seller_ID')->references('id')->on('users')->onDelete('cascade');
-            $table->decimal('Latitude');
-            $table->decimal('Longitude');
+            $table->string('price');
             $table->string('image');
             $table->timestamps();
         });

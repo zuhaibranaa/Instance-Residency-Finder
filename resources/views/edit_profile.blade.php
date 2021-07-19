@@ -1,11 +1,7 @@
-@extends('layouts.app')
+@extends('newLayout.app')
 
 @section('content')
     <div class="row justify-content-between" >
-
-        {{-- SideBar --}}
-        @include('layouts.sidebar')
-
         {{-- Main Operation--}}
         <div style="padding-inline: 2%" class="col-md-12 ">
 
@@ -45,7 +41,7 @@
                         <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
 
                         <div class="col-md-6">
-                            <input id="phone" value="{{ $user['phone'] }}" type="tel" placeholder="03001234567" pattern="[0-9]{11}" class="form-control @error('phone') is-invalid @enderror" name="phone" required autocomplete="phone">
+                            <input id="phone" value="{{ $user['phone'] }}" type="tel" placeholder="03001234567" pattern="[0-9]{11}" class="search-field @error('phone') is-invalid @enderror" name="phone" required autocomplete="phone">
 
                             @error('phone')
                                 <span class="invalid-feedback" role="alert">
@@ -60,7 +56,7 @@
                         <label for="roleid" class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</label>
 
                         <div class="col-md-6">
-                            <select id="roleid" class="form-control @error('roleid') is-invalid @enderror" name="roleid" required>
+                            <select id="roleid" class="search-field @error('roleid') is-invalid @enderror" name="roleid" required>
                                 <option value="2" @if (auth()->user()['role_id'] == 2)
                                     selected
                                 @endif>Seller</option>

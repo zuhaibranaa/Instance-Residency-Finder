@@ -56,7 +56,7 @@ class PropertiesController extends Controller
                 $path = $image->getClientOriginalName();
                 $name = time() . '-' . $path;
                 array_push($img,$name);
-                $image->storeAs('gallery-images', $name);
+                $image->storeAs('images', $name);
             }
           }
         $string_array = json_encode($img);
@@ -65,8 +65,7 @@ class PropertiesController extends Controller
         $property->Location = $request['location'];
         $property->Property_Type = $request['roleid'];
         $property->Seller_ID = auth()->user()->id;
-        $property->Latitude = 75.22;
-        $property->Longitude = 29.33;
+        $property->price = $request['price'];
         $property->image = $string_array;
         $property->save();
         return back();
@@ -81,7 +80,11 @@ class PropertiesController extends Controller
     public function edit($id)
     {
         $property = property::find($id);
-        return response()->json_encode($property);
+        if (auth()->user()->id == $property['Seller_ID']) {
+            return view('update_property')->with('property',$property);
+        }else {
+            echo 'Permission Denied';
+        }
     }
 
     /**
@@ -129,7 +132,7 @@ class PropertiesController extends Controller
     public function destroy($id)
     {
         $property = property::find($id);
-        if (auth()->user->id() == $property['Seller_ID']) {
+        if (auth()->user()->id == $property['Seller_ID']) {
             $property->delete();
         }
         return back();

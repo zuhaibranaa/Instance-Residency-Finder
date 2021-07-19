@@ -1,8 +1,7 @@
-@extends('layouts.app')
+@extends('newLayout.app')
 
 @section('content')
 <div class="row">
-    @include('layouts.sidebar')
     <div class="col-sm-12" style="padding-inline: 2%">
         <div class="card">
             <div class="card-body">
