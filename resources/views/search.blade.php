@@ -42,11 +42,17 @@
 
 			<div class="row">
                 @foreach ($data as $dat)
+                <?php
+                $val = trim($dat->image,'[');
+                $val = trim($val,']');
+                $val = trim($val,'\"');
+                // $val = trim($val,'"');
+                $r = explode(',',$val);?>
 				<!-- Listing Item -->
 				<div class="col-lg-4 col-md-6">
 					<a href="listings-single-page.html" class="listing-item-container compact">
 						<div class="listing-item">
-							<img src="{{ asset('storage/images/'.$dat->image) }}" alt="{{ $dat->image}}">
+							<img src="{{ asset("storage/images/".trim($r[0],'\"'))}}" alt="{{ $r[0] }}">
 
 							<div class="listing-badge now-closed">Rs.{{ $dat->price }}</div>
 

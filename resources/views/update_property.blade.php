@@ -2,9 +2,9 @@
 
 @section('content')
 
-<form method="POST" enctype='multipart/form-data' id="create-property" action="/property">
+<form method="POST" enctype='multipart/form-data' id="create-property" action="/property/{{ $property['id'] }}">
         @csrf
-
+        <input type="hidden" name="_method" value="PUT">
 <div id="add-listing" style="margin-top: 5%">
     <div class="add-listing-section">
 

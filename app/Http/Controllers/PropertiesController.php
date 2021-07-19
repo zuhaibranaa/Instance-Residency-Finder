@@ -118,11 +118,10 @@ class PropertiesController extends Controller
         $string_array = json_encode($img);
         if (auth()->user()->id == $property['Seller_ID']) {
             $property->Title = $request['title'];
-            $property->Title = $request['Location'];
-            $property->Title = $request['Property_Type'];
-            $property->Title = $request['Latitude'];
-            $property->Title = $request['Longitude'];
-            $property->Title = $request['image'];
+            $property->Location = $request['location'];
+            $property->Property_Type = $request['roleid'];
+            $property->price = $request['price'];
+            $property->image = $request['image'];
             $property->save();
             return back()->with('message','Data Updated Successfully');
         }else {
