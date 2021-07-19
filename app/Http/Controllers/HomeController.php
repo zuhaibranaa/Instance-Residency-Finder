@@ -33,7 +33,7 @@ class HomeController extends Controller
             $data = property::all();
             return view('home')->with('role',$role)->with('data',$data);
         }else {
-            $data = property::where('Seller_ID',$user);
+            $data = property::where('Seller_ID',$user['id']);
             return view('home')->with('role',$role)->with('data',$data);
         }
     }

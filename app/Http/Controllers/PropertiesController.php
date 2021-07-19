@@ -16,6 +16,13 @@ class PropertiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function search(Request $keywords)
+    {
+        $kw = $keywords['keywords'];
+        $data = json_decode(DB::table('properties')->where('Location', $kw)->get());
+        return view('search')->with('data',$data);
+    }
+
     public function index()
     {
         $role = auth()->user();
@@ -56,7 +63,7 @@ class PropertiesController extends Controller
                 $path = $image->getClientOriginalName();
                 $name = time() . '-' . $path;
                 array_push($img,$name);
-                $image->storeAs('images', $name);
+                $image->storeAs('/public/images', $name);
             }
           }
         $string_array = json_encode($img);
@@ -105,7 +112,7 @@ class PropertiesController extends Controller
                 $path = $image->getClientOriginalName();
                 $name = time() . '-' . $path;
                 array_push($img,$name);
-                $image->storeAs('gallery-images', $name);
+                $image->storeAs('/public/images', $name);
             }
           }
         $string_array = json_encode($img);

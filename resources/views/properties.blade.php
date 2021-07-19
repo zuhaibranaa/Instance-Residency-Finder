@@ -7,13 +7,15 @@
         @foreach ($properties as $property)
         <li><?php $v = json_decode($property['image']); $v = $v[0] ?>
             <div class="list-box-listing">
-                <div class="list-box-listing-img"><a href="#"><img src="{{ asset('images/gallery-images/'.$v) }}" alt="{{ $v }}"></a></div>
+                <div class="list-box-listing-img"><a href="#"><img src="{{ asset('storage/images/'.$v) }}" alt="{{ $v }}"></a></div>
                 <div class="list-box-listing-content">
                     <div class="inner">
                         <h3><a href="#">{{ $property['Title'] }}</a></h3>
-                        <span>{{ $property['Location'] }}</span>
-                        <div class="star-rating" data-rating="3.5">
-                            <div class="rating-counter">{{ $property['Property_Type'] }}</div>
+                        <span>{{ $property['Location'] }}</span><br/>
+                        <span><?php $user = App\Models\user::find($property['Seller_ID']) ?> Owner : {{ $user['name'] }}</span><br/>
+                        <span>Contact : {{ $user['phone'] }}</span><br/>
+                        <span>CNIC : {{ $user['cnic'] }}</span><br/>
+                        <span>Posted For : {{ $property['Property_Type'] }}</span>
                     </div>
                 </div>
             </div>

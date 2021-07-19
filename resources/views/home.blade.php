@@ -18,13 +18,15 @@
 
 						<div class="main-search-input-item location">
 							<div id="autocomplete-container">
-								<input id="autocomplete-input" type="text" placeholder="Location">
+                                <form id="kwSearch" method="GET" action="/search/">
+                                    {{-- @csrf --}}
+                                    <input id="autocomplete-input" type="text" name="keywords" placeholder="Location">
+                                </form>
 							</div>
 							<a href="#"><i class="fa fa-map-marker"></i></a>
 						</div>
 
-						<button class="button" onclick="window.location.href='listings-half-screen-map-list.html'">Search</button>
-
+						<button class="button" onclick="document.getElementById('kwSearch').submit()">Search</button>
 					</div>
 				</div>
 			</div>
