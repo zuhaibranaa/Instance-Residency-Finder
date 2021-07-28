@@ -19,6 +19,8 @@ class CreatePropertiesTable extends Migration
             $table->string('Location');
             $table->string('Property_Type');
             $table->unsignedBigInteger('Seller_ID');
+            $table->unsignedBigInteger('status');
+            $table->foreign('status')->references('id')->on('statuses')->onDelete('cascade');
             $table->foreign('Seller_ID')->references('id')->on('users')->onDelete('cascade');
             $table->string('price');
             $table->string('image');

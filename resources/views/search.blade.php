@@ -46,11 +46,10 @@
                 $val = trim($dat->image,'[');
                 $val = trim($val,']');
                 $val = trim($val,'\"');
-                // $val = trim($val,'"');
                 $r = explode(',',$val);?>
 				<!-- Listing Item -->
 				<div class="col-lg-4 col-md-6">
-					<a href="listings-single-page.html" class="listing-item-container compact">
+					<a href="/property/{{ $dat->id }}" class="listing-item-container compact">
 						<div class="listing-item">
 							<img src="{{ asset("storage/images/".trim($r[0],'\"'))}}" alt="{{ $r[0] }}">
 

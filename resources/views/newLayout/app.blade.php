@@ -72,8 +72,9 @@
                                 <li><a class="znav {{Request::is('/') ? 'current' : ''}}" href="/">Home</a></li>
 
                                 <li><a class="znav {{Request::is('property') ? 'current' : ''}}" href="{{ url('property') }}">Manage Properties</a></li>
-
+                                @if (auth()->user()['role_id'] == 1)
                                 <li><a class="znav {{Request::is('profile') ? 'current' : ''}}" href="{{ url('profile') }}">Manage Users</a></li>
+                                @endif
                             </ul>
                         </nav>
                         @endif
@@ -384,6 +385,7 @@ strings: ["Flats"," Houses"," Hostels"],
 <!-- Style Switcher
 ================================================== -->
 <script src="{{ asset('js/switcher.js')}}"></script>
+<script src="{{ asset('js/app.js')}}"></script>
 
 <!-- Style Switcher / End -->
 

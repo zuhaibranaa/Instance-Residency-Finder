@@ -15,7 +15,13 @@
 					<h4>Expolore Best Locations That Suits You</h4>
 
 					<div class="main-search-input">
-
+                        <div class="main-search-input-item">
+							<select data-placeholder="All Categories" class="chosen-select" name="Category">
+								<option value="All">All Categories</option>
+								<option value="Sale">Sale</option>
+								<option value="Rent">Rent</option>
+							</select>
+						</div>
 						<div class="main-search-input-item location">
 							<div id="autocomplete-container">
                                 <form id="kwSearch" method="GET" action="/search/">

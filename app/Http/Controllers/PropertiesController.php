@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\property;
+use App\Models\User;
 
 class PropertiesController extends Controller
 {
@@ -19,7 +19,11 @@ class PropertiesController extends Controller
     public function search(Request $keywords)
     {
         $kw = $keywords['keywords'];
-        $data = json_decode(DB::table('properties')->where('Location', $kw)->get());
+        $data = property::where(
+            [
+                'Location' => $kw,
+                'Status' => 2
+         ])->get();
         return view('search')->with('data',$data);
     }
 
@@ -30,8 +34,8 @@ class PropertiesController extends Controller
             $properties = property::all();
             return view('properties')->with('properties',$properties);
         }else if($role['role_id'] == 2){
-            // $properties = property::where('Seller_ID',$role->id);
-            $properties = DB::table('properties')->where('Seller_ID', '=', $role->id)->get();
+            $properties = property::where('Seller_ID',$role->id)->get();
+            // $properties = DB::table('properties')->where('Seller_ID', $role->id)->get();
             $props = json_decode($properties,true);
             return view('properties')->with('properties',$props);
         }
@@ -68,6 +72,7 @@ class PropertiesController extends Controller
           }
         $string_array = json_encode($img);
         $property = new property();
+        $property->status = 1;
         $property->Title = $request['title'];
         $property->Location = $request['location'];
         $property->Property_Type = $request['roleid'];
@@ -76,6 +81,19 @@ class PropertiesController extends Controller
         $property->image = $string_array;
         $property->save();
         return back();
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $property = property::find($id);
+        $user = User::find($property->Seller_ID);
+
+        return view('singleprop')->with('property',$property)->with('user',$user);
     }
 
     /**
@@ -121,6 +139,7 @@ class PropertiesController extends Controller
             $property->Location = $request['location'];
             $property->Property_Type = $request['roleid'];
             $property->price = $request['price'];
+            $property->status = 1;
             $property->image = $request['image'];
             $property->save();
             return back()->with('message','Data Updated Successfully');

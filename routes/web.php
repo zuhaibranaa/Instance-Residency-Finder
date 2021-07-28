@@ -20,5 +20,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Auth::routes();
 Route::resource('/property', PropertiesController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/search', [App\Http\Controllers\PropertiesController::class, 'search'])->name('search');
+Route::get('/search', [PropertiesController::class, 'search'])->name('search');
 Route::resource('/profile', AccountsController::class);
+Route::resource('/approve', AdminApprovalController::class);
+
