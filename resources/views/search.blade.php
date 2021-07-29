@@ -55,6 +55,9 @@
 
 
 			<div class="row">
+                @if (count($data) == 0)
+                    No Record Found
+                @endif
                 @foreach ($data as $dat)
                 <?php
                 $val = trim($dat->image,'[');
