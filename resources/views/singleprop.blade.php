@@ -60,6 +60,7 @@
 							{{ $property->Location }}
 						</a>
 					</span>
+                    <h3>{{ $property->price }}</h3>
 				</div>
                 <div class="col-lg-6 col-md-6 verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
                     <i class="sl sl-icon-check"></i> {{ App\Models\status::find($property->status)['name'] }}
