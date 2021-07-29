@@ -19,6 +19,10 @@
                     </select>
                 </div>
 
+                <div class="main-search-input-item">
+                    <input type="text" name="price" placeholder="Enter Price" >
+                </div>
+
                 <div class="main-search-input-item location">
                     <div id="autocomplete-container">
                             {{-- @csrf --}}

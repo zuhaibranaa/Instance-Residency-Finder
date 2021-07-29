@@ -20,26 +20,57 @@ class PropertiesController extends Controller
     {
         $kw = $keywords['keywords'];
         $cat = $keywords['cat'];
+        $price = $keywords['price'];
         if ($cat != 'All Categories') {
             if ($kw != null) {
-                $data = property::where('Location','like', '%' . $kw . '%')
-                ->where('Status', '=', 2)
-                ->where('Property_Type', '=', $cat)
-                ->get();
+                if ($price != null) {
+                    $data = property::where('Location','like', '%' . $kw . '%')
+                    ->where('Status', '=', 2)
+                    ->where('price', '=', $price)
+                    ->where('Property_Type', '=', $cat)
+                    ->get();
+                } else {
+                    $data = property::where('Location','like', '%' . $kw . '%')
+                    ->where('Status', '=', 2)
+                    ->where('Property_Type', '=', $cat)
+                    ->get();
+                }
+
             } else {
-                $data = property::where('Property_Type', '=', $cat)
-                ->where('Status', '=', 2)
-                ->get();
+                if ($price != null) {
+                    $data = property::where('Property_Type', '=', $cat)
+                    ->where('price', '=', $price)
+                    ->where('Status', '=', 2)
+                    ->get();
+                } else {
+                    $data = property::where('Property_Type', '=', $cat)
+                    ->where('Status', '=', 2)
+                    ->get();
+                }
+
             }
 
         } else {
             if ($kw != null) {
-                $data = property::where('Location','like', '%' . $kw . '%')
-                ->where('Status', '=', 2)
-                ->get();
+                if ($price != null) {
+                    $data = property::where('Location','like', '%' . $kw . '%')
+                    ->where('price', '=', $price)
+                    ->where('Status', '=', 2)
+                    ->get();
+                } else {
+                    $data = property::where('Location','like', '%' . $kw . '%')
+                    ->where('Status', '=', 2)
+                    ->get();
+                }
             } else {
-                $data = property::where('Status', '=', 2)
-                ->get();
+                if ($price != null) {
+                    $data = property::where('Status', '=', 2)
+                    ->where('price', '=', $price)
+                    ->get();
+                } else {
+                    $data = property::where('Status', '=', 2)
+                    ->get();
+                }
             }
         }
 
