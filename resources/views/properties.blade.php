@@ -34,9 +34,6 @@
                 @if (auth()->user()->id == $property['Seller_ID'])
                     <a href="/property/{{ $property['id'] }}/edit" class="button gray"><i class="sl sl-icon-note"></i> Edit</a>
                 @endif
-                @if (auth()->user()['role_id'] == 1)
-                <a href="#" onclick="document.getElementById('approve').submit()" class="button gray"><i class="sl sl-icon-note"></i> Approve</a>
-                @endif
                 <a onclick="document.getElementById('delete').submit()" class="button gray"><i class="sl sl-icon-close"></i> Delete</a>
             </div>
         </li>
