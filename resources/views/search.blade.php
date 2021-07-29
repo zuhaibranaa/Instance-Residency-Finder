@@ -56,7 +56,7 @@
 
 			<div class="row">
                 @if (count($data) == 0)
-                    No Record Found
+                    <h1 style="text-align: center; align-content: center">No Record Found</h1>
                 @endif
                 @foreach ($data as $dat)
                 <?php
