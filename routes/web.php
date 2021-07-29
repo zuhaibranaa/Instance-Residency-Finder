@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PropertiesController;
+use App\Http\Controllers\AdminApprovalController;
 
 /*
 |--------------------------------------------------------------------------

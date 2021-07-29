@@ -39,7 +39,7 @@ class AccountsController extends Controller
             $u = User::find($id);
             return view('edit_profile')->with('user',$u)->with('role',$r);
         }else {
-            return 'Permission Denied';
+            return abort(403, 'Unauthorized action.');
         }
 
     }

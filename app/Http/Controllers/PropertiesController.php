@@ -19,11 +19,30 @@ class PropertiesController extends Controller
     public function search(Request $keywords)
     {
         $kw = $keywords['keywords'];
-        $data = property::where(
-            [
-                'Location' => $kw,
-                'Status' => 2
-         ])->get();
+        $cat = $keywords['cat'];
+        if ($cat != 'All Categories') {
+            if ($kw != null) {
+                $data = property::where('Location','like', '%' . $kw . '%')
+                ->where('Status', '=', 2)
+                ->where('Property_Type', '=', $cat)
+                ->get();
+            } else {
+                $data = property::where('Property_Type', '=', $cat)
+                ->where('Status', '=', 2)
+                ->get();
+            }
+
+        } else {
+            if ($kw != null) {
+                $data = property::where('Location','like', '%' . $kw . '%')
+                ->where('Status', '=', 2)
+                ->get();
+            } else {
+                $data = property::where('Status', '=', 2)
+                ->get();
+            }
+        }
+
         return view('search')->with('data',$data);
     }
 
@@ -108,7 +127,7 @@ class PropertiesController extends Controller
         if (auth()->user()->id == $property['Seller_ID']) {
             return view('update_property')->with('property',$property);
         }else {
-            echo 'Permission Denied';
+            return abort(403, 'Unauthorized action.');
         }
     }
 
@@ -144,7 +163,7 @@ class PropertiesController extends Controller
             $property->save();
             return back()->with('message','Data Updated Successfully');
         }else {
-            echo "Permission Denied";
+            return abort(403, 'Unauthorized action.');
         }
     }
 

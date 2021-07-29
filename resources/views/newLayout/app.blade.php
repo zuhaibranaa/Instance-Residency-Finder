@@ -74,6 +74,7 @@
                                 <li><a class="znav {{Request::is('property') ? 'current' : ''}}" href="{{ url('property') }}">Manage Properties</a></li>
                                 @if (auth()->user()['role_id'] == 1)
                                 <li><a class="znav {{Request::is('profile') ? 'current' : ''}}" href="{{ url('profile') }}">Manage Users</a></li>
+                                <li><a class="znav {{Request::is('approve') ? 'current' : ''}}" href="{{ url('approve') }}">Pending Properties</a></li>
                                 @endif
                             </ul>
                         </nav>

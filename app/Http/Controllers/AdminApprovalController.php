@@ -10,6 +10,19 @@ class AdminApprovalController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
+
+    public function index()
+    {
+        $role = auth()->user();
+        if($role['role_id'] == 1){
+            $properties = property::where('status', 1)->get();
+            // return 123;
+            return view('PendingApprovals')->with('properties',$properties);
+        }else{
+            return abort(403, 'Permission denied.');
+        }
+
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -19,13 +32,13 @@ class AdminApprovalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (auth()->user()['role_id'] == 2) {
+        if (auth()->user()['role_id'] == 1) {
             $property = property::find($id);
             $property->status = 2;
             $property->save();
             return back();
         }else{
-            return "Permission Denied";
+            return abort(403, 'Permission denied.');
         }
 
     }
@@ -43,7 +56,7 @@ class AdminApprovalController extends Controller
             $property->delete();
         return back();
         }else{
-            return "Permission Denied";
+            return abort(403, 'Permission Denied.');
         }
     }
 }
