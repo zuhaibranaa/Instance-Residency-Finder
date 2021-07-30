@@ -65,9 +65,12 @@
                             @endif
                 @else
                          <!-- Main Navigation -->
-                         @if (auth()->user()['role_id'] != 3)
                          <nav id="navigation" class="style-1">
-                            <ul id="responsive">
+                             <ul id="responsive">
+                                @if (auth()->user()['role_id'] == 3)
+                                <li><a class="znav {{Request::is('/complain/create') ? 'current' : ''}}" href="/complain/create">Make Complain</a></li>
+                                @endif
+                                @if (auth()->user()['role_id'] != 3)
 
                                 <li><a class="znav {{Request::is('/') ? 'current' : ''}}" href="/">Home</a></li>
 
@@ -75,10 +78,11 @@
                                 @if (auth()->user()['role_id'] == 1)
                                 <li><a class="znav {{Request::is('profile') ? 'current' : ''}}" href="{{ url('profile') }}">Manage Users</a></li>
                                 <li><a class="znav {{Request::is('approve') ? 'current' : ''}}" href="{{ url('approve') }}">Pending Properties</a></li>
+                                <li><a class="znav {{Request::is('complain') ? 'current' : ''}}" href="{{ url('complain') }}">Complains</a></li>
+                                @endif
                                 @endif
                             </ul>
                         </nav>
-                        @endif
                         <div class="clearfix"></div>
                         <!-- Main Navigation / End -->
                     </div>
