@@ -7,7 +7,7 @@
 
 // Vue.use(VueGoogleMaps,{
 //     load:{
-//         key: 'AIzaSyAGk_36Sk2N9tbTFDuwAOMpKysDzdtqtfg'
+//         key: 'YOUR_GOOGLE_MAPS_API_KEY'
 //     }
 // })
 
